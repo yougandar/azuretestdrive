@@ -484,7 +484,7 @@
         },
         "esVersion": {
             "type": "string",
-            "defaultValue": "2.0.0",
+            "defaultValue": "2.4.1",
             "allowedValues": [
                 "2.0.0",
                 "2.0.2",
