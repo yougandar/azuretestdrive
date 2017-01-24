@@ -1,0 +1,290 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "type": "string",
+            "defaultValue": "westus",
+            "allowedValues": [
+                "Brazil South",
+                "brazilsouth",
+                "East Asia",
+                "eastasia",
+                "East US",
+                "eastus",
+                "Japan East",
+                "japaneast",
+                "Japan West",
+                "japanwest",
+                "North Central US",
+                "northcentralus",
+                "North Europe",
+                "northeurope",
+                "South Central US",
+                "southcentralus",
+                "West Europe",
+                "westeurope",
+                "West US",
+                "westus",
+                "Southeast Asia",
+                "southeastasia",
+                "Central US",
+                "centralus",
+                "East US 2",
+                "eastus2"
+            ],
+            "metadata": {
+                "description": "Deployment Location Hint: Use lowercase for creating ipaddress"
+            }
+        },
+        "azureCloudStorageAccountKey": {
+            "type": "string",
+            "defaultValue": ""
+        },
+        "computeApiVersion": {
+            "type": "string",
+            "defaultValue": "2015-06-15",
+            "allowedValues": [
+                "2015-05-01-preview",
+                "2015-06-15",
+                "2016-03-30"
+            ],
+            "metadata": {
+                "description": "API Version for the Compute Resources"
+            }
+        },
+        "virtualMachinesNameMaster": {
+            "type": "string",
+            "defaultValue": "vmName",
+            "metadata": {
+                "description": "Virtual Machine Name"
+            }
+        },
+        "customScriptMasterName": {
+            "type": "string",
+            "defaultValue": "vmExtensionName",
+            "metadata": {
+                "description": "Virtual Machine Extension Name"
+            }
+        },
+        "typeHandlerVersion": {
+            "type": "string",
+            "defaultValue": "2.0",
+            "allowedValues": [
+                "1.4",
+                "1.5",
+                "2.0"
+            ],
+            "metadata": {
+                "description": "Virtual Machine Extension Name"
+            }
+        },
+        "dataNodesAreMasterEligible": {
+            "type": "string",
+            "defaultValue": "No",
+            "allowedValues": [
+                "Yes",
+                "No"
+            ],
+            "metadata": {
+                "description": "Make all data nodes master-eligible, this can be useful for small elasticsearch cluster deployments, but for larger deployments, it is recommended to use dedicated master nodes"
+            }
+        },
+        "esPlugins": {
+            "type": "string",
+            "allowedValues": [
+                "Yes",
+                "No"
+            ],
+            "defaultValue": "Yes",
+            "metadata": {
+                "description": "Install the Plugins - Marvel, Shield, Watcher, Graph* (Elasticsearch 2.3.0+)"
+            }
+        },
+        "azureCloudPlugin": {
+            "type": "string",
+            "allowedValues": [
+                "Yes",
+                "No"
+            ],
+            "defaultValue": "No",
+            "metadata": {
+                "description": "Choose whether to install Azure Cloud plugin. The plugin allows an existing Azure storage account to be used for snapshot and restore"
+            }
+        },
+        "vmDataNodeCount": {
+            "type": "int",
+            "defaultValue": 3,
+            "metadata": {
+                "description": "Number of Elasticsearch data nodes"
+            }
+        },
+        "vmHostNamePrefix": {
+            "type": "string",
+            "defaultValue": "ela",
+            "maxLength": 5,
+            "metadata": {
+                "description": "The prefix to use for hostnames when naming virtual machines in the cluster. Can be up to 5 characters in length, must begin with an alphanumeric character and can contain alphanumeric and hyphen characters. Hostnames are used for resolution of master nodes so if you are deploying a cluster into an existing virtual network containing an existing Elasticsearch cluster, be sure to set this to a unique prefix to differentiate the hostnames of this cluster from an existing cluster"
+            }
+        },
+        "vNetLoadBalancerIp": {
+            "type": "string",
+            "defaultValue": "10.0.0.4",
+            "metadata": {
+                "description": "The static IP address for the internal load balancer. This must be an available IP address in the specified subnet"
+            }
+        },
+        "esVersion": {
+            "type": "string",
+            "defaultValue": "2.0.0",
+            "allowedValues": [
+                "2.0.0",
+                "2.0.2",
+                "2.1.2",
+                "2.2.0",
+                "2.3.2",
+                "2.3.3",
+                "2.3.4",
+                "2.3.5",
+                "2.4.0",
+                "2.4.1",
+                "5.0.2",
+                "5.1.1"
+            ],
+            "metadata": {
+                "description": "Elasticsearch version to install"
+            }
+        },
+        "esClusterName": {
+            "type": "string",
+            "defaultValue": "elasticsearch",
+            "metadata": {
+                "description": "The name of the Elasticsearch cluster"
+            }
+        },
+        "esAdditionalPlugins": {
+            "type": "string",
+            "defaultValue": "",
+            "metadata": {
+                "description": "Additional elasticsearch plugins to install.  Each plugin must be separated by a semicolon. e.g. analysis-icu;mapper-attachments"
+            }
+        },
+        "shieldAdminPassword": {
+            "type": "securestring",
+            "defaultValue": "Sysga1n4205!",
+            "metadata": {
+                "description": "Password for the superuser 'es_admin' in 2.x or 'elastic' in 5.x and up, must be > 6 characters"
+            }
+        },
+        "shieldReadPassword": {
+            "type": "securestring",
+            "defaultValue": "Sysga1n4205!",
+            "metadata": {
+                "description": "Password for the 'es_read' user with user (read-only) role, must be > 6 characters"
+            }
+        },
+        "shieldKibanaPassword": {
+            "type": "securestring",
+            "defaultValue": "Sysga1n4205!",
+            "metadata": {
+                "description": "Password for the `es_kibana` user with kibana4 role, must be > 6 characters"
+            }
+        },
+        "customScriptsUrl": {
+            "type": "array",
+            "defaultValue": [
+                "http://abc.xyz.com",
+                "http://github.com",
+                "http://abc.xyz.com",
+                "http://github.com",
+                "http://abc.xyz.com"
+            ],
+            "metadata": {
+                "description": "Custom Script URL"
+            }
+        }
+    },
+    "variables": {
+        "masterNodeCount": 3,
+        "suffix": "[substring(uniqueString(resourceGroup().id), 0, 6)]",
+        "clusterPrefix": "elk",
+        "storageAccountName": "[concat(variables('clusterPrefix'),'sa',variables('suffix'))]",
+        "dedicatedMasterNodesShortOpts": {
+            "No": "d",
+            "Yes": ""
+        },
+        "installPluginsShortOpts": {
+            "No": "",
+            "Yes": "l"
+        },
+        "esSettings": {
+            "clusterName": "[parameters('esClusterName')]",
+            "version": "[parameters('esVersion')]",
+            "installPlugins": "[parameters('esPlugins')]",
+            "installAdditionalPlugins": "[parameters('esAdditionalPlugins')]",
+            "shieldAdminPwd": "[parameters('shieldAdminPassword')]",
+            "shieldReadPwd": "[parameters('shieldReadPassword')]",
+            "shieldKibanaPwd": "[parameters('shieldKibanaPassword')]",
+            "shieldKibanaServerPwd": "[uniqueString(resourceGroup().id, deployment().name, parameters('shieldKibanaPassword'))]",
+            "kibanaVersion": "[variables('esToKibanaMapping')[parameters('esVersion')]]"
+        },
+        "esToKibanaMapping": {
+            "2.0.2": "4.2.2",
+            "2.1.2": "4.3.3",
+            "2.2.0": "4.4.2",
+            "2.3.2": "4.5.4",
+            "2.3.3": "4.5.4",
+            "2.3.4": "4.5.4",
+            "2.3.5": "4.5.4",
+            "2.4.0": "4.6.1",
+            "2.4.1": "4.6.1",
+            "5.0.2": "5.0.2",
+            "5.1.1": "5.1.1"
+        },
+        "installAzureCloudPluginShortOpts": {
+            "No": "",
+            "Yes": "j"
+        },
+        "azureCloudStorageAccount": {
+            "install": "[parameters('azureCloudPlugin')]",
+            "name": "[variables('storageAccountName')]",
+            "key": "[parameters('azureCloudStorageAccountKey')]"
+        },
+        "topologySettings": {
+            "dataNodesAreMasterEligible": "[parameters('dataNodesAreMasterEligible')]",
+            "vmHostNamePrefix": "[parameters('vmHostNamePrefix')]",
+            "vmDataNodeCount": "[parameters('vmDataNodeCount')]",
+            "vNetLoadBalancerIp": "[parameters('vNetLoadBalancerIp')]"
+        },
+        "namespacePrefix": "[variables('topologySettings').vmHostNamePrefix]",
+        "commonInstallParams": "[concat(variables('esSettings').clusterName, ' -v ', variables('esSettings').version, ' -A ', variables('esSettings').shieldAdminPwd, ' -R ', variables('esSettings').shieldReadPwd, ' -K ', variables('esSettings').shieldKibanaPwd, ' -S ', variables('esSettings').shieldKibanaServerPwd, ' -Z ', variables('topologySettings').vmDataNodeCount, ' -p \"', variables('namespacePrefix'), '\" -a \"', variables('azureCloudStorageAccount').name, '\" -k \"', variables('azureCloudStorageAccount').key, '\" -L \"', variables('esSettings').installAdditionalPlugins, '\"')]",
+        "installAzureCloudPluginShortOpt": "[variables('installAzureCloudPluginShortOpts')[variables('azureCloudStorageAccount').install]]",
+        "installPluginsShortOpt": "[variables('installPluginsShortOpts')[variables('esSettings').installPlugins]]",
+        "dedicatedMasterNodesShortOpt": "[variables('dedicatedMasterNodesShortOpts')[variables('topologySettings').dataNodesAreMasterEligible]]",
+        "commonShortOpts": "[concat(variables('dedicatedMasterNodesShortOpt'),  variables('installPluginsShortOpt'), variables('installAzureCloudPluginShortOpt'), 'n ')]"
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Compute/virtualMachines/extensions",
+            "name": "[concat(parameters('virtualMachinesNameMaster'),copyIndex(),'/',parameters('customScriptMasterName'))]",
+            "apiVersion": "[parameters('computeApiVersion')]",
+            "location": "[parameters('location')]",
+            "copy": {
+                "name": "vmLoopMaster",
+                "count": "[variables('masterNodeCount')]"
+            },
+            "properties": {
+                "publisher": "Microsoft.Azure.Extensions",
+                "type": "CustomScript",
+                "typeHandlerVersion": "[parameters('typeHandlerVersion')]",
+                "autoUpgradeMinorVersion": true,
+                "settings": {
+                    "fileUris": "[parameters('customScriptsUrl')]"
+                },
+                "protectedSettings": {
+                    "commandToExecute": "[concat('bash elasticsearch-ubuntu-install.sh -x', variables('commonShortOpts'), variables('commonInstallParams'))]"
+                }
+            }
+        }
+    ]
+}
