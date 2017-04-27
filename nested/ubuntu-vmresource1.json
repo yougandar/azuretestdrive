@@ -29,7 +29,7 @@
             "defaultValue": "nsg-new",
             "type": "string"
         },
-        "adminPassword": {
+        "password": {
             "defaultValue": "sysgain@12345",
             "type": "securestring"
         },
