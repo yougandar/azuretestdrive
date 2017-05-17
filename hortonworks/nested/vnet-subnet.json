@@ -1,0 +1,78 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+       "location":{
+           "type": "string",
+           "defaultValue": "eastus",
+           "metadata": {
+              "description":"Resouce group of the Location"
+           }
+       },
+       "virtualNetworkName":{
+           "type": "string",
+           "defaultValue": "hortonwork-vnet",
+           "metadata": {
+              "description":"virtualNetworks of the virtualNetworkName"
+           }
+       },
+       "addressPrefix":{
+           "type": "string",
+           "defaultValue": "10.3.2.0/24",
+           "metadata": {
+              "description":"virtualNetworks of the addressPrefix"
+           }
+       },
+       "subnetName":{
+           "type": "string",
+           "defaultValue": "hortonwork-subnet",
+           "metadata": {
+              "description":"virtualNetworks of the subnetName"
+           }
+       },
+       "subnetPrefix":{
+           "type": "string",
+           "defaultValue": "10.3.2.0/24",
+           "metadata": {
+              "description":"virtualNetworks of the subnetPrefix"
+           }
+       },
+       "tag": {
+            "type": "object",
+            "defaultValue": {
+                "key1": "key",
+                "value1": "value"
+            },
+            "metadata": {
+                "description": "Tag Values"
+            }
+        }
+    },
+    "variables": {},
+    "resources": [   
+        {
+            "name": "[parameters('virtualNetworkName')]",
+            "type": "Microsoft.Network/virtualNetworks",
+            "apiVersion": "2016-12-01",
+            "location": "[parameters('location')]",
+            "tags": {
+                "[parameters('tag').key1]": "[parameters('tag').value1]"
+            },
+            "properties": {
+                "addressSpace": {
+                    "addressPrefixes": [
+                        "[parameters('addressPrefix')]"
+                    ]
+                },
+                "subnets": [
+                    {
+                        "name": "[parameters('subnetName')]",
+                        "properties": {
+                            "addressPrefix": "[parameters('subnetPrefix')]"
+                        }
+                    }
+                ]
+            }
+        }       
+    ]
+}
