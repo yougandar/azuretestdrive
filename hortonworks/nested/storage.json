@@ -1,0 +1,52 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+       "location":{
+           "type": "string",
+           "defaultValue": "eastus",
+           "metadata": {
+              "description":"Resouce group of the Location"
+           }
+       },
+       "storageAccountName":{
+           "type": "string",
+           "defaultValue": "hortonworksda",
+           "metadata": {
+              "description":"VM of the storage account name"
+           }
+       },
+       "storageAccountType":{
+           "type": "string",
+           "defaultValue": "Premium_LRS",
+           "metadata": {
+              "description":"VM of the storage account type"
+           }
+       },
+       "tag": {
+            "type": "object",
+            "defaultValue": {
+                "key1": "key",
+                "value1": "value"
+            },
+            "metadata": {
+                "description": "Tag Values"
+            }
+        }
+    },
+    "variables": {},
+    "resources": [   
+        {
+            "name": "[parameters('storageAccountName')]",
+            "type": "Microsoft.Storage/storageAccounts",
+            "apiversion": "2015-06-15",
+            "location": "[parameters('location')]",
+            "tags": {
+                "[parameters('tag').key1]": "[parameters('tag').value1]"
+            },
+            "properties": {
+                "accountType": "[parameters('storageAccountType')]"
+            }
+        }       
+    ]
+}
