@@ -1,0 +1,61 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+       "location":{
+           "type": "string",
+           "defaultValue": "eastus",
+           "metadata": {
+              "description":"Resouce group of the Location"
+           }
+       },
+       "publicIpAddressName":{
+           "type": "string",
+           "defaultValue": "hortonworks-ip",
+           "metadata": {
+              "description":"Resouce group of the publicIpAddressName"
+           }
+       },
+       "publicIPdnsPrefix":{
+           "type": "string",
+           "defaultValue": "publicdnsprefix",
+           "metadata": {
+              "description":"Resouce group of the publicIPdnsPrefix"
+           }
+       },
+       "tag": {
+            "type": "object",
+            "defaultValue": {
+                "key1": "key",
+                "value1": "value"
+            },
+            "metadata": {
+                "description": "Tag Values"
+            }
+        }
+    },
+    "variables": {},
+    "resources": [   
+           {
+            "name": "[parameters('publicIpAddressName')]",
+            "type": "Microsoft.Network/publicIpAddresses",
+            "apiVersion": "2016-09-01",
+            "location": "[parameters('location')]",
+            "tags": {
+                "[parameters('tag').key1]": "[parameters('tag').value1]"
+            },
+            "properties": {
+                "publicIpAllocationMethod": "Dynamic",
+                "dnsSettings": {
+                    "domainNameLabel": "[parameters('publicIPdnsPrefix')]"
+                }
+            }
+        }   
+    ],
+    "outputs": {
+        "fqdn": {
+            "value": "[concat(reference(parameters('publicIPAddressName')).dnsSettings.fqdn)]",
+            "type": "string"
+        }
+    }
+}
