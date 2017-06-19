@@ -43,19 +43,20 @@ The objective of this test drive is to test the windows machine for wannacry ran
 
 
 a.	To login to the workstation take the public IP, username and password of that machine. Launch the windows RDP client and enter the public IP and click on connect.
-
+![Remote Desktop](https://github.com/yougandar/azuretestdrive/blob/master/chefautomate-images/remotedesktop.png)
 b.	After that enter the credentials of the windows system
-
+![Windows System](https://github.com/yougandar/azuretestdrive/blob/master/chefautomate-images/login.png)
 c.	You will be launched into the workstation. Now clock the power shell icon to launch the power shell window.
-
+![Power Shell](https://github.com/yougandar/azuretestdrive/blob/master/chefautomate-images/powershell.png)
 d.	Upload the cookbooks that are already in the machine to the chef server using “knife cookbook upload compat_resource audit” command. 
-
+![Kife Cookbook](https://github.com/yougandar/azuretestdrive/blob/master/chefautomate-images/knifecookbook.png)
 e.	Add those cookbooks to the run list of the client using “knife node run_list add <windows machine name> recipe[audit]” command.
-
+![Kife Node](https://github.com/yougandar/azuretestdrive/blob/master/chefautomate-images/knifenode.png)
 f.	Run the inspec exec along with the github url.
     > Inspec exec https://github.com/adamleff/inspec-profile-wannacry-exploit.git
     You can see the wannacry vulnerability. It looks bad.
-
+![Inspec Exec](https://github.com/yougandar/azuretestdrive/blob/master/chefautomate-images/inspecexe1.png)
+![Inspec Exec](https://github.com/yougandar/azuretestdrive/blob/master/chefautomate-images/inspecexe2.png)
 
 g.	Now you must run the “chef-client”
     Then we can see the vulnerability in chef automate.
