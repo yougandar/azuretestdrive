@@ -28,8 +28,8 @@ The objective of this test drive is to test the windows machine for wannacry ran
 
 ## 5.	Chef Automate Architecture
 ![Chef Automate Architecture](https://github.com/yougandar/azuretestdrive/blob/master/chefautomate-images/chefautomatearchitecture.png)
-##
-Once the deployment is done, the template deploys the following resources:
+
+## Once the deployment is done, the template deploys the following resources:
 •	One chef Automate VM
 •	One windows VM with ChefDK
 •	NSG’s
