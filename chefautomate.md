@@ -24,9 +24,9 @@ Finally, Chef Automate integrates with Chef server, which allows management of n
 ## 3.	Objective
 The objective of this test drive is to test the windows machine for wannacry ransomware vulnerability using ‘inspec  exec’. If vulnerability persists it will remove the vulnerability by applying appropriate patches.
 ## 4.	Chef server architecture
-
+![Chef server architecture](https://github.com/yougandar/azuretestdrive/blob/master/chefautomate-images/chefserverarchitecture.png)
 ## 5.	Chef Automate Architecture
-
+![Chef Automate Architecture](https://github.com/yougandar/azuretestdrive/blob/master/chefautomate-images/chefautomatearchitecture.png)
 Once the deployment is done, the template deploys the following resources:
 •	One chef Automate VM
 •	One windows VM with ChefDK
