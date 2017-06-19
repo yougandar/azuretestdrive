@@ -34,10 +34,15 @@ The objective of this test drive is to test the windows machine for wannacry ran
  Once the deployment is done, the template deploys the following resources:
  
 .         One chef Automate VM
+
 .         One windows VM with ChefDK
+
 .         NSG’s
+
 .         Public IP’s
+
 .         Storage Account
+
 .         Virtual network.
 
 ## 6.	Getting Started
