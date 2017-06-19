@@ -80,6 +80,7 @@ i.	To run the Chef commands, we need to redirect to the Chef-repo folder by usin
 ![Chef-repo](https://github.com/yougandar/azuretestdrive/blob/master/chefautomate-images/chef-repo.png)
 
 j.	To see the compliance in power shell Run the inspec exec along with the GitHub url that will check for the compliance status.
+          
           > Inspec exec https://github.com/adamleff/inspec-profile-wannacry-exploit.git
     You can see the wannacry vulnerability in power shell also. It looks bad here too.
 
