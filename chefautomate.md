@@ -1,4 +1,7 @@
-## Overview of Fortimail:
- 
-Fortimail is one of the Fortinet products to protect your network, The FortiMail VM Secure Messaging Platform is part of an integrated hardware and software solution that provides powerful and flexible logging and reporting, antispam, antivirus, and email archiving capabilities to incoming and outgoing email traffic.
-VMware vSphere Hypervisor (ESX/ESXi) software must be installed on a server prior to installing FortiMail VM.
+## Contents
+1.	Welcome	3
+2.	What is chef and what is chef automate.	3
+3.	Objective	3
+4.	Chef server architecture	4
+5.	Chef Automate Architecture	4
+6.	Getting Started	5
