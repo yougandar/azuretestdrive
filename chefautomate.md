@@ -31,12 +31,12 @@ The objective of this test drive is to test the windows machine for wannacry ran
 ![Chef Automate Architecture](https://github.com/yougandar/azuretestdrive/blob/master/chefautomate-images/chefautomatearchitecture.png)
 
 ### Once the deployment is done, the template deploys the following resources:
-•	One chef Automate VM
-•	One windows VM with ChefDK
-•	NSG’s
-•	Public IP’s
-•	Storage Account
-•	Virtual network.
+•One chef Automate VM
+•One windows VM with ChefDK
+•NSG’s
+•Public IP’s
+•Storage Account
+•Virtual network.
 
 ## 6.	Getting Started
 
@@ -81,7 +81,7 @@ i.	To run the Chef commands, we need to redirect to the Chef-repo folder by usin
 
 j.	To see the compliance in power shell Run the inspec exec along with the GitHub url that will check for the compliance status.
           
-          > Inspec exec https://github.com/adamleff/inspec-profile-wannacry-exploit.git
+                    > Inspec exec https://github.com/adamleff/inspec-profile-wannacry-exploit.git
     You can see the wannacry vulnerability in power shell also. It looks bad here too.
 
 ![wannacry vulnerability powershell](https://github.com/yougandar/azuretestdrive/blob/master/chefautomate-images/wannacry-vulnerability-powershell.png)
