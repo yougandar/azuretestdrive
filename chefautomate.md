@@ -1,11 +1,12 @@
 ![Chef Automate](https://github.com/yougandar/azuretestdrive/blob/master/chefautomate-images/chefautomate.PNG)
+
 ## Contents
-1.	Welcome	3
-2.	What is chef and what is chef automate.	3
-3.	Objective	3
-4.	Chef server architecture	4
-5.	Chef Automate Architecture	4
-6.	Getting Started	5
+1.	Welcome                                           	
+2.	What is chef and what is chef automate.	            
+3.	Objective	
+4.	Chef server architecture	
+5.	Chef Automate Architecture	
+6.	Getting Started	
 
 
 ## 1.	Welcome
@@ -43,41 +44,61 @@ The objective of this test drive is to test the windows machine for wannacry ran
 
 
 a.	To login to the workstation take the public IP, username and password of that machine. Launch the windows RDP client and enter the public IP and click on connect.
+
 ![Remote Desktop](https://github.com/yougandar/azuretestdrive/blob/master/chefautomate-images/remotedesktop.png)
+
 b.	After that enter the credentials of the windows system
+
 ![Windows System](https://github.com/yougandar/azuretestdrive/blob/master/chefautomate-images/login.png)
-c.	You will be launched into the workstation. Now clock the power shell icon to launch the power shell window.
-![Power Shell](https://github.com/yougandar/azuretestdrive/blob/master/chefautomate-images/powershell.png)
-d.	Upload the cookbooks that are already in the machine to the chef server using “knife cookbook upload compat_resource audit” command. 
-![Kife Cookbook](https://github.com/yougandar/azuretestdrive/blob/master/chefautomate-images/knifecookbook.png)
-e.	Add those cookbooks to the run list of the client using “knife node run_list add <windows machine name> recipe[audit]” command.
-![Kife Node](https://github.com/yougandar/azuretestdrive/blob/master/chefautomate-images/knifenode.png)
-f.	Run the inspec exec along with the github url.
-    > Inspec exec https://github.com/adamleff/inspec-profile-wannacry-exploit.git
-    You can see the wannacry vulnerability. It looks bad.
-![Inspec Exec](https://github.com/yougandar/azuretestdrive/blob/master/chefautomate-images/inspecexe1.png)
-![Inspec Exec](https://github.com/yougandar/azuretestdrive/blob/master/chefautomate-images/inspecexe2.png)
 
-g.	Now you must run the “chef-client”
-    Then we can see the vulnerability in chef automate.
-    
-h.	Go to your favorite browser and type the chef automate url, login with the chef automate user and password.
+c.	You will be launched into the workstation. Go to your favorite browser and type the chef automate url and login with the chef automate user and password.
 
-i.	You will get the chef automate home page. Click on node tab.
+![Chef Automate URL](https://github.com/yougandar/azuretestdrive/blob/master/chefautomate-images/chef-automate-url.png)
 
-j.	The coverge status is good. Go to the compliance status by clicking that tab.
+d.	You will get the chef automate home page. On that page Click on Nodes tab.
 
-k.	It looks bad. The node is non-compliant. To see what was the problem go to that node by clicking the node.
+![Chef Automate Homepage](https://github.com/yougandar/azuretestdrive/blob/master/chefautomate-images/chef-automate-homepage.png)
 
-l.	You can see that the windows machine has the wannacry vulnerability.
+e.	The coverge status is good. Go to the compliance status by clicking that tab .
 
-m.	Now you have to apply a cookbook to resolve the issue using the command. “Chef-client -o tissues”
+![Chef Compliance Status](https://github.com/yougandar/azuretestdrive/blob/master/chefautomate-images/compliance-status.png)
 
-n.	Now, To feel good need run the “inspec exec https://github.com/adamleff/inspec-profile-wannacry-exploit.git” command.
+f.	It looks bad. You can see that The node is non-compliant. To see what was the problem go to that node by clicking the node.
 
-o.	Run the “chef-client” command to converge the data to automate.
+![Chef Non-Compliance Status](https://github.com/yougandar/azuretestdrive/blob/master/chefautomate-images/non-compliant.png)
 
-p.	Now, go to the browser again refresh the browser to see the compliance status and see that the windows node is compliant.
+g.	You can see that the windows machine has the wannacry vulnerability in below screenshot.
 
+![wannacry vulnerability](https://github.com/yougandar/azuretestdrive/blob/master/chefautomate-images/wannacry-vulnerability.png)
 
+h.	Now click the power shell icon to launch the power shell window.
 
+![power shell icon](https://github.com/yougandar/azuretestdrive/blob/master/chefautomate-images/power-shell-icon.png)
+
+i.	To run the Chef commands, we need to redirect to the Chef-repo folder by using cd chef-repo command.
+
+![Chef-repo](https://github.com/yougandar/azuretestdrive/blob/master/chefautomate-images/chef-repo.png)
+
+j.	To see the compliance in power shell Run the inspec exec along with the GitHub url that will check for the compliance status.
+          > Inspec exec https://github.com/adamleff/inspec-profile-wannacry-exploit.git
+    You can see the wannacry vulnerability in power shell also. It looks bad here too.
+
+![wannacry vulnerability powershell](https://github.com/yougandar/azuretestdrive/blob/master/chefautomate-images/wannacry-vulnerability-powershell.png)
+
+![wannacry vulnerability powershell](https://github.com/yougandar/azuretestdrive/blob/master/chefautomate-images/wannacry-vulnerability-powershell1.png)
+
+k.	You saw the Vulnerability in above screenshot. Now you should apply a cookbook to resolve the issue using the command. “Chef-client -o tissues” This cookbook downloads the patches for wannacry vulnerability and installs in our machine.
+
+![Chef-client -o tissues](https://github.com/yougandar/azuretestdrive/blob/master/chefautomate-images/chef-client-o.png)
+
+l.	Now, To feel good need run the “inspec exec https://github.com/adamleff/inspec-profile-wannacry-exploit.git” command.
+
+![inspec exec](https://github.com/yougandar/azuretestdrive/blob/master/chefautomate-images/inspec-exec.png)
+
+m.	Run the “chef-client” command to converge the data to automate.
+
+![chef-client](https://github.com/yougandar/azuretestdrive/blob/master/chefautomate-images/chef-client.png)
+
+n.	Now, go to the browser again refresh the browser to see the compliance status and see that the windows node is compliant. The below screen shot shows that.
+
+![compliance status](https://github.com/yougandar/azuretestdrive/blob/master/chefautomate-images/windows-node-compliant.png)
